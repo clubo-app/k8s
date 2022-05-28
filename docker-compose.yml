@@ -1,0 +1,55 @@
+version: "3.1"
+
+# bash into container docker exec -it user sh
+
+services:
+  scylla:
+    container_name: scylla
+    image: scylladb/scylla:5.0.rc5
+    ports:
+      - "9042:9042"
+    volumes:
+      - ./data/scylla:/var/lib/scylla/data
+
+  #yugabyte:
+  #  container_name: yugabyte
+  #  image: yugabytedb/yugabyte:latest
+  #  command: bin/yugabyted start --base_dir=/home/yugabyte/ybdata --daemon=false
+  #  ports:
+  #    - "7000:7000"
+  #    - "9000:9000"
+  #    - "5433:5433"
+  #    - "9042:9042"
+  #  volumes:
+  #    - ./data/yugabyte:/home/yugabyte/ybdata
+
+
+  party-postgres:
+    container_name: party-postgres
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_USER: user
+      POSTGRES_DB: party
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+
+  mailhog:
+    container_name: mailhog
+    image: mailhog/mailhog
+    ports:
+        - "1025:1025"
+        - "8025:8025"
+
+  #mongodb:
+  #  container_name: mongo
+  #  image: mongo:latest
+  #  environment:
+  #    MONGO_INITDB_ROOT_USERNAME: root
+  #    MONGO_INITDB_ROOT_PASSWORD: rootpassword
+  #  ports:
+  #    - 27017:27017
+  #  volumes:
+  #    - ./data/mongo:/data/db

@@ -17,131 +17,86 @@
 #
 docker_build(
     'jonashiltl/user-service', 
-    '.', 
-    dockerfile='services/user/Dockerfile', 
+    '../user-service', 
+    dockerfile='../user-service/Dockerfile', 
     only=[
-        './services/user', 
-        './packages', 
-        './go.mod', 
-        './go.sum', 
+        '../user-service', 
     ],
     live_update=[
         # Sync files from host to container
-        sync('./services/user', '/app/services/user'),
-        sync('./packages', '/app/packages'),
+        sync('../user-service', '/app'),
     ]
 )
 
 docker_build(
-    'jonashiltl/party-service', 
-    '.', 
-    dockerfile='services/party/Dockerfile', 
+    'jonashiltl/party-service',
+    '../party-service', 
+    dockerfile='../party-service/Dockerfile', 
     only=[
-        './services/party', 
-        './packages', 
-        './go.mod', 
-        './go.sum', 
+        '../party-service', 
     ],
     live_update=[
-        sync('./services/party', '/app/services/party'),
-        sync('./packages', '/app/packages'),
+        sync('../party-service', '/app'),
     ]
 )
 
 docker_build(
     'jonashiltl/relation-service', 
-    '.', 
-    dockerfile='services/relation/Dockerfile', 
+    '../relation-service', 
+    dockerfile='../relation-service/Dockerfile', 
     only=[
-        './services/relation', 
-        './packages', 
-        './go.mod', 
-        './go.sum', 
+        '../relation-service', 
     ],
     live_update=[
-        sync('./services/relation', '/app/services/relation'),
-        sync('./packages', '/app/packages'),
+        sync('../relation-service', '/app'),
     ]
 )
 
 docker_build(
     'jonashiltl/story-service', 
-    '.', 
-    dockerfile='services/story/Dockerfile', 
+    '../story-service',
+    dockerfile='../story-service/Dockerfile', 
     only=[
-        './services/story', 
-        './packages', 
-        './go.mod', 
-        './go.sum', 
+        '../story-service', 
     ],
     live_update=[
-        sync('./services/story', '/app/services/story'),
-        sync('./packages', '/app/packages'),
+        sync('../story-service', '/app'),
     ]
 )
 
 docker_build(
-    'jonashiltl/comment-service', 
-    '.', 
-    dockerfile='services/comment/Dockerfile', 
+    'jonashiltl/comment-service',
+    '../comment-service', 
+    dockerfile='../comment-service/Dockerfile', 
     only=[
-        './services/comment', 
-        './packages', 
-        './go.mod', 
-        './go.sum', 
+        '../comment-service', 
     ],
     live_update=[
-        sync('./services/comment', '/app/services/comment'),
-        sync('./packages', '/app/packages'),
+        sync('../comment-service', '/app'),
     ]
 )
 
 docker_build(
-    'jonashiltl/notification-service', 
-    '.', 
-    dockerfile='services/notification/Dockerfile', 
+    'jonashiltl/notification-service',
+    '../notification-service', 
+    dockerfile='../notification-service/Dockerfile', 
     only=[
-        './services/notification', 
-        './packages', 
-        './go.mod', 
-        './go.sum', 
+        '../notification-service', 
     ],
     live_update=[
-        sync('./services/notification', '/app/services/notification'),
-        sync('./packages', '/app/packages'),
+        sync('../notification-service', '/app'),
     ]
 )
 
 docker_build(
-    'jonashiltl/aggregator', 
-    '.', 
-    dockerfile='services/aggregator/Dockerfile', 
+    'jonashiltl/aggregator',
+    '../aggregator-service', 
+    dockerfile='../aggregator-service/Dockerfile', 
     only=[
-        './services/aggregator', 
-        './packages', 
-        './go.mod', 
-        './go.sum', 
+        '../aggregator-service', 
     ],
     live_update=[
-        sync('./services/aggregator', '/app/services/aggregator'),
-        sync('./packages', '/app/packages'),
-    ]
-)
-
-docker_build(
-    'jonashiltl/scylla-sync', 
-    '.', 
-    dockerfile='services/scylla-sync/Dockerfile', 
-    only=[
-        './services/scylla-sync', 
-        './packages', 
-        './go.mod', 
-        './go.sum', 
-    ],
-    live_update=[
-        sync('./services/scylla-sync', '/app/services/scylla-sync'),
-        sync('./services/scylla-sync/main.go', '/app/services/scylla-sync/main.go'),
-        sync('./packages', '/app/packages'),
+        sync('../aggregator-service', '/app'),
     ]
 )
 
@@ -159,29 +114,29 @@ helm_remote(
 #   More info: https://docs.tilt.dev/api.html#api.k8s_yaml
 #
 k8s_yaml([
-    'k8s/deployments/comment.yaml',
-    'k8s/deployments/notification.yaml',
-    'k8s/deployments/party.yaml',
-    'k8s/deployments/user.yaml',
-    'k8s/deployments/story.yaml',
-    'k8s/deployments/relation.yaml',
-    'k8s/deployments/aggregator.yaml',
-    'k8s/deployments/scylla-sync.yaml',
+    'deployments/comment.yaml',
+    'deployments/notification.yaml',
+    'deployments/party.yaml',
+    'deployments/user.yaml',
+    'deployments/story.yaml',
+    'deployments/relation.yaml',
+    'deployments/aggregator.yaml',
+    #'deployments/scylla-sync.yaml',
 ])
 k8s_yaml([
-    'k8s/services/comment.yaml',
-    'k8s/services/notification.yaml',
-    'k8s/services/party.yaml',
-    'k8s/services/story.yaml',
-    'k8s/services/user.yaml',
-    'k8s/services/vespa.yaml',
-    'k8s/services/aggregator.yaml',
-    'k8s/services/relation.yaml',
-#    'k8s/services/scylla.yaml',
-#    'k8s/services/mongo.yaml',
+    'services/comment.yaml',
+    'services/notification.yaml',
+    'services/party.yaml',
+    'services/story.yaml',
+    'services/user.yaml',
+    'services/vespa.yaml',
+    'services/aggregator.yaml',
+    'services/relation.yaml',
+    #'k8s/services/scylla.yaml',
+    #'k8s/services/mongo.yaml',
 ])
 k8s_yaml([
-    'k8s/statefulsets/vespa.yaml', 
+    'statefulsets/vespa.yaml', 
 ])
 #k8s_yaml([
 #    'k8s/endpoints/mongo.yaml',

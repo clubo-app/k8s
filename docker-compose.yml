@@ -26,7 +26,7 @@ services:
 
   party-postgres:
     container_name: party-postgres
-    image: postgres
+    image: postgis/postgis
     ports:
       - "5432:5432"
     environment:
@@ -34,14 +34,14 @@ services:
       POSTGRES_USER: user
       POSTGRES_DB: party
     volumes:
-      - ./data/postgres:/var/lib/postgresql/data
+      - ./data/postgres:/var/lib/postgresql
 
-  mailhog:
-    container_name: mailhog
-    image: mailhog/mailhog
-    ports:
-        - "1025:1025"
-        - "8025:8025"
+  #mailhog:
+  #  container_name: mailhog
+  #  image: mailhog/mailhog
+  #  ports:
+  #      - "1025:1025"
+  #      - "8025:8025"
 
   #mongodb:
   #  container_name: mongo

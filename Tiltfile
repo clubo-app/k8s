@@ -115,33 +115,35 @@ helm_remote(
 #
 k8s_yaml([
     'deployments/comment.yaml',
-    'deployments/notification.yaml',
+    # 'deployments/notification.yaml',
     'deployments/party.yaml',
     'deployments/user.yaml',
-    'deployments/story.yaml',
+    # 'deployments/story.yaml',
     'deployments/relation.yaml',
     'deployments/aggregator.yaml',
     #'deployments/scylla-sync.yaml',
 ])
 k8s_yaml([
     'services/comment.yaml',
-    'services/notification.yaml',
+    # 'services/notification.yaml',
     'services/party.yaml',
-    'services/story.yaml',
+    # 'services/story.yaml',
     'services/user.yaml',
-    'services/vespa.yaml',
+    # 'services/vespa.yaml',
     'services/aggregator.yaml',
     'services/relation.yaml',
     #'k8s/services/scylla.yaml',
     #'k8s/services/mongo.yaml',
 ])
-k8s_yaml([
-    'statefulsets/vespa.yaml', 
-])
+# k8s_yaml([
+#    'statefulsets/vespa.yaml', 
+#])
 #k8s_yaml([
 #    'k8s/endpoints/mongo.yaml',
 #    'k8s/endpoints/scylla.yaml',
 #])
+
+update_settings(suppress_unused_image_warnings=["jonashiltl/story-service", "jonashiltl/notification-service"])
 
 
 # Customize a Kubernetes resource

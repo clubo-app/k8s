@@ -34,7 +34,19 @@ services:
       POSTGRES_USER: user
       POSTGRES_DB: party
     volumes:
-      - ./data/postgres:/var/lib/postgresql
+      - ./data/party-postgres:/var/lib/postgresql
+
+  user-postgres:
+    container_name: user-postgres
+    image: postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_USER: user
+      POSTGRES_DB: user
+    volumes:
+      - ./data/user-postgres:/var/lib/postgresql
 
   #mailhog:
   #  container_name: mailhog

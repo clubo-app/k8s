@@ -16,15 +16,28 @@
 #   More info: https://docs.tilt.dev/api.html#api.docker_build
 #
 docker_build(
-    'jonashiltl/user-service', 
-    '../user-service', 
-    dockerfile='../user-service/Dockerfile', 
+    'jonashiltl/profile-service', 
+    '../profile-service', 
+    dockerfile='../profile-service/Dockerfile', 
     only=[
-        '../user-service', 
+        '../profile-service', 
     ],
     live_update=[
         # Sync files from host to container
-        sync('../user-service', '/app'),
+        sync('../profile-service', '/app'),
+    ]
+)
+
+docker_build(
+    'jonashiltl/auth-service', 
+    '../auth-service', 
+    dockerfile='../auth-service/Dockerfile', 
+    only=[
+        '../auth-service', 
+    ],
+    live_update=[
+        # Sync files from host to container
+        sync('../auth-service', '/app'),
     ]
 )
 
@@ -117,7 +130,8 @@ k8s_yaml([
     'deployments/comment.yaml',
     # 'deployments/notification.yaml',
     'deployments/party.yaml',
-    'deployments/user.yaml',
+    'deployments/profile.yaml',
+    'deployments/auth.yaml',
     # 'deployments/story.yaml',
     'deployments/relation.yaml',
     'deployments/aggregator.yaml',
@@ -128,7 +142,8 @@ k8s_yaml([
     # 'services/notification.yaml',
     'services/party.yaml',
     # 'services/story.yaml',
-    'services/user.yaml',
+    'services/profile.yaml',
+    'services/auth.yaml',
     # 'services/vespa.yaml',
     'services/aggregator.yaml',
     'services/relation.yaml',

@@ -36,17 +36,29 @@ services:
     volumes:
       - ./data/party-postgres:/var/lib/postgresql
 
-  user-postgres:
-    container_name: user-postgres
+  auth-postgres:
+    container_name: auth-postgres
     image: postgres
     ports:
       - "5433:5432"
     environment:
       POSTGRES_PASSWORD: mysecretpassword
       POSTGRES_USER: user
-      POSTGRES_DB: user
+      POSTGRES_DB: auth
     volumes:
-      - ./data/user-postgres:/var/lib/postgresql
+      - ./data/auth-postgres:/var/lib/postgresql
+
+  profile-postgres:
+    container_name: profile-postgres
+    image: postgres
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_USER: user
+      POSTGRES_DB: profile
+    volumes:
+      - ./data/profile-postgres:/var/lib/postgresql
 
   #mailhog:
   #  container_name: mailhog

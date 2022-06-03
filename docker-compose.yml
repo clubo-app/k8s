@@ -60,6 +60,18 @@ services:
     volumes:
       - ./data/profile-postgres:/var/lib/postgresql
 
+  story-postgres:
+    container_name: story-postgres
+    image: postgres
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_USER: user
+      POSTGRES_DB: story
+    volumes:
+      - ./data/story-postgres:/var/lib/postgresql
+
   #mailhog:
   #  container_name: mailhog
   #  image: mailhog/mailhog

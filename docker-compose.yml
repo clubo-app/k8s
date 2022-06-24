@@ -5,7 +5,7 @@ version: "3.1"
 services:
   scylla:
     container_name: scylla
-    image: scylladb/scylla:5.0.rc5
+    image: scylladb/scylla:5.0.rc7
     ports:
       - "9042:9042"
     volumes:

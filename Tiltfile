@@ -113,6 +113,19 @@ docker_build(
     ]
 )
 
+docker_build(
+    'jonashiltl/scylla-sync',
+    '../scylla-sync-service', 
+    dockerfile='../scylla-sync-service/Dockerfile', 
+    only=[
+        '../scylla-sync-service', 
+    ],
+    live_update=[
+        sync('../scylla-sync-service', '/app'),
+    ]
+)
+
+
 load('ext://helm_remote', 'helm_remote')
 helm_remote(
     "nats",
@@ -135,7 +148,7 @@ k8s_yaml([
     'deployments/story.yaml',
     'deployments/relation.yaml',
     'deployments/aggregator.yaml',
-    #'deployments/scylla-sync.yaml',
+    'deployments/scylla-sync.yaml',
 ])
 k8s_yaml([
     'services/comment.yaml',
